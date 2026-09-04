@@ -1,7 +1,7 @@
-# Fama-French 3-Factor Model: Fitted to a Single Stock
+# Fama-French 3-Factor Model: Explaining Equity Returns
 
-A simple, classic asset-pricing regression: explaining a stock's returns using the
-Fama-French 3-Factor model.
+A classic asset-pricing regression: explaining a stock's daily returns using the
+Fama-French 3-Factor model. Built and run as a single Jupyter notebook.
 
 ## What this is
 
@@ -16,12 +16,12 @@ factors meaningfully improve on this:
 - **HML** ("High Minus Low") — the historical tendency for "value" stocks (high
   book-to-market ratio) to outperform "growth" stocks.
 
-This project fits that model to a single stock's daily returns using linear
-regression (OLS), and interprets the result.
+This project fits that model to a single stock's daily returns (Apple, `AAPL`)
+using linear regression (OLS), and interprets the result.
 
 ## Data
 
-- **Stock returns**: pulled via `yfinance` for a chosen ticker (default `AAPL`).
+- **Stock returns**: pulled via `yfinance`.
 - **Factor returns** (Mkt-RF, SMB, HML, RF): pulled directly from Kenneth French's
   publicly available data library at Dartmouth — the standard source every academic
   and practitioner uses for this exact model.
@@ -33,40 +33,42 @@ regression (OLS), and interprets the result.
 
    `Excess Return = alpha + beta_mkt * Mkt-RF + beta_smb * SMB + beta_hml * HML + error`
 
-3. Interpret the output:
-   - **beta_mkt** — how sensitive the stock is to the overall market (close to 1 =
-     moves with the market; higher = more aggressive than the market).
-   - **beta_smb** — positive means the stock behaves more like a small-cap stock;
-     negative means it behaves more like a large-cap stock.
-   - **beta_hml** — positive means the stock behaves more like a value stock;
-     negative means it behaves more like a growth stock.
-   - **alpha** — the return left unexplained by the three factors. In an efficient
-     market, alpha should be close to zero; a large, statistically significant alpha
-     would be a notable (and rare) finding.
-   - **R-squared** — how much of the stock's return variation the three factors
-     explain overall.
+3. Interpret the output — see Results below.
 
 ## Results
 
-*(Fill this in after running `main.py` locally — paste the actual regression output:
-alpha, the three betas, R-squared, and which coefficients were statistically
-significant.)*
+Fitted on AAPL, 2015–present (2,910 matched trading days):
 
 | Coefficient | Estimate | p-value | Significant? |
 |-------------|----------|---------|---------------|
-| Alpha       | TBD      | TBD     | TBD           |
-| Mkt-RF beta | TBD      | TBD     | TBD           |
-| SMB beta    | TBD      | TBD     | TBD           |
-| HML beta    | TBD      | TBD     | TBD           |
+| Alpha       | 0.0004 (0.04%) | 0.104   | No            |
+| Mkt-RF beta | 1.16     | <0.001  | Yes           |
+| SMB beta    | -0.29    | <0.001  | Yes           |
+| HML beta    | -0.34    | <0.001  | Yes           |
 
-R-squared: TBD
+**R-squared: 0.564**
+
+**Interpretation:**
+- **Beta of 1.16** — Apple is more volatile than the overall market (moves about
+  16% more on average), consistent with it being a higher-beta tech stock.
+- **Negative SMB (-0.29)** — Apple behaves like a large-cap stock, not a small-cap
+  one — correctly picked up by the model given it's one of the largest companies
+  in the world.
+- **Negative HML (-0.34)** — Apple behaves like a growth stock, not a value stock —
+  again consistent with its profile as a high-growth tech company.
+- **Alpha not significant (p=0.104)** — no unexplained "extra" return once the
+  three factors are accounted for, which is the expected result in an efficient
+  market (a large, significant alpha would be the unusual finding).
+- **R-squared of 0.564** — the three factors explain 56% of Apple's daily return
+  variation, a solid result for a single-stock regression (noisier than a
+  portfolio-level regression would be).
 
 ## Limitations
 
 - Single-stock regression on daily data — factor models are more commonly applied
-  to diversified portfolios, where idiosyncratic (stock-specific) noise averages out.
-  A single stock's daily returns are noisier, so expect a lower R-squared than you'd
-  see applying this to a portfolio or index.
+  to diversified portfolios, where idiosyncratic (stock-specific) noise averages
+  out. A single stock's daily returns are noisier, so expect a lower R-squared than
+  you'd see applying this to a portfolio or index.
 - Only covers the original 3 factors — later research (Fama-French 5-Factor,
   momentum) adds more explanatory power.
 - Uses daily rather than monthly data; the original Fama-French papers use monthly
@@ -76,6 +78,7 @@ R-squared: TBD
 
 - `fama_french_3factor.ipynb` — the full project: data loading, factor download,
   regression, interpretation, and plot, in one notebook
+- `requirements.txt` — Python dependencies
 - `README.md` — this file
 
 ## Running it

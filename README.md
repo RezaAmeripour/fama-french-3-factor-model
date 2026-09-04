@@ -83,9 +83,4 @@ Fitted on AAPL, 2015–present (2,910 matched trading days):
 
 ## Running it
 
-```bash
-pip install -r requirements.txt
-jupyter notebook
-```
-Then open `fama_french_3factor.ipynb` in the browser tab that opens, and run the
-cells top to bottom (Shift+Enter on each).
+You can view results by opening the fama_french_3factor.ipynb on GitHub.

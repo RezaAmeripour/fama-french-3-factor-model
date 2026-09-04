@@ -54,12 +54,12 @@ significant.)*
 
 | Coefficient | Estimate | p-value | Significant? |
 |-------------|----------|---------|---------------|
-| Alpha       | 0.0004 (0.04%)      | 0.104     | No           |
-| Mkt-RF beta | 1.16      | <0.001     | Yes           |
-| SMB beta    | -0.29      | <0.001     | Yes           |
-| HML beta    | -0.34      | <0.001     | Yes           |
+| Alpha       | TBD      | TBD     | TBD           |
+| Mkt-RF beta | TBD      | TBD     | TBD           |
+| SMB beta    | TBD      | TBD     | TBD           |
+| HML beta    | TBD      | TBD     | TBD           |
 
-R-squared: 0.564
+R-squared: TBD
 
 ## Limitations
 
@@ -74,14 +74,15 @@ R-squared: 0.564
 
 ## Repository structure
 
-- `src/data_loader.py` — pulls stock returns and Fama-French factor data
-- `src/regression.py` — runs the OLS regression and formats results
-- `main.py` — runs the full pipeline end to end
-- `outputs/` — regression summary and a plot of actual vs. fitted returns
+- `fama_french_3factor.ipynb` — the full project: data loading, factor download,
+  regression, interpretation, and plot, in one notebook
+- `README.md` — this file
 
 ## Running it
 
 ```bash
 pip install -r requirements.txt
-python main.py
+jupyter notebook
 ```
+Then open `fama_french_3factor.ipynb` in the browser tab that opens, and run the
+cells top to bottom (Shift+Enter on each).

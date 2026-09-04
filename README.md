@@ -83,4 +83,4 @@ Fitted on AAPL, 2015–present (2,910 matched trading days):
 
 ## Running it
 
-You can view results by opening the fama_french_3factor.ipynb on GitHub.
+You can view the results by opening the fama_french_3factor.ipynb on GitHub.
